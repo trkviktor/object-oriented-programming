@@ -2,24 +2,24 @@ package mypersons;
 
 public class Adult extends Person {
 
-	private String work;
+	private String workplace;
 	
 	@Override
 	public String toString() {
-		return "Adult [getWork()=" + getWork() + ", getName()=" + getName() + ", getAge()=" + getAge() + "]";
+		return "Adult [getworkplace()=" + getworkplace() + ", getName()=" + getName() + ", getAge()=" + getAge() + "]";
 	}
 
-	public Adult(String name, int age, String work) {
+	public Adult(String name, int age, String workplace) {
 		super(name, age);
-		this.work = work;
+		this.workplace = workplace;
 	}
 
-	public String getWork() {
-		return work;
+	public String getworkplace() {
+		return workplace;
 	}
 
-	public void setWork(String work) {
-		this.work = work;
+	public void setworkplace(String workplace) {
+		this.workplace = workplace;
 	}
 	
 	

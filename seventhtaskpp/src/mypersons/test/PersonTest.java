@@ -42,7 +42,7 @@ public class PersonTest {
 				str = in.nextLine();
 				return new Child(strArray[0],Integer.parseInt(strArray[1]),str);
 			}else {
-				System.out.println("Work:");
+				System.out.println("Workplace:");
 				str = in.nextLine();
 				return new Adult(strArray[0],Integer.parseInt(strArray[1]),str);
 
