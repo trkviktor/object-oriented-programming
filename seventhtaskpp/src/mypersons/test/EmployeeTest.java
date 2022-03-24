@@ -1,5 +1,6 @@
 package mypersons.test;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import mypersons.Adult;
@@ -13,13 +14,13 @@ public class EmployeeTest {
 static Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		int n = read(0,10);
-		Person[] persons = new Person[n];
-		fillArray(persons);
+//		int n = read(0,10);
+//		Person[] persons = new Person[n];
+//		fillArray(persons);
 		
-//		Person[] persons = {new Child("Kakusz",6,"kazi"),
-//							new Adult("Vakusz",23,""),
-//							new Employee("Zakusz",19,"prodhost",4383)};
+		Person[] persons = {new Child("Kakusz",6,"kazi"),
+							new Adult("Vakusz",23,""),
+							new Employee("Zakusz",19,"prodhost",4383)};
 		
 		System.out.println("Before sorting: ");
 		printArray(persons);
@@ -51,16 +52,7 @@ static Scanner in = new Scanner(System.in);
 	}
 	
 	public static void sortArray(Person[] persons) {
-		int minIndex = 0;
-		for(int i = 1; i < persons.length; i++) {
-			if(persons[minIndex].getAge() < persons[i].getAge())
-				minIndex = i;
-			
-			Person temp = persons[i];
-			persons[i] = persons[minIndex];
-			persons[minIndex] = temp;
-		}
-		
+		Arrays.sort(persons, (a,b) -> a.getAge()-b.getAge());		
 	}
 	
 	public static int read(int min, int max) {
