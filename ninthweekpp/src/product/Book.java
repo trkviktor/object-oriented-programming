@@ -171,14 +171,16 @@ public class Book extends Product{
 	
 	
 
-	@Override
-	public String toString() {
-		return "Book [author=" + author + ", title=" + title + ", getYearOfPublication()=" + getYearOfPublication() + ", pages="
-				+ pages + ", style=" + style + ", getPrice()=" + getPrice() + "]";
-	}
+	
 
 	
 	
+	@Override
+	public String toString() {
+		return "Book [author=" + author + ", title=" + title + ", yearOfPublication=" + yearOfPublication + ", pages="
+				+ pages + ", style=" + style + ", getPrice()=" + getPrice() + ", getCurrency()=" + getCurrency() + "]";
+	}
+
 	public String getStyle() {
 		return style;
 	}
