@@ -26,7 +26,6 @@ public class ProductTest {
 		String[] array = new String[products.length];
 		for(int i = 0; i < products.length;i++) {
 			if(products[i] instanceof Book) {
-				int count = 0;
 				boolean ok = true;
 				
 				for(int k = 0;k < array.length;k++) {
@@ -63,21 +62,23 @@ public class ProductTest {
 				System.out.println("Product type(Book,Bread): ");
 				inp = input.nextLine();
 			try {
-				if(inp.equals("Bread")) {
-					System.out.println("Name,price,amount: ");
-					inp = input.nextLine();
-					String[] strArray = inp.split(",");
-					products[i] = new Bread(strArray[0],Integer.parseInt(strArray[1]),Integer.parseInt(strArray[2]));
-					ok = true;
-				}
-				else if(inp.equals("Book")) {
+				String[] strArray = inp.split(",");
+				switch(inp.toUpperCase()) {
+				case "BOOK":
 					System.out.println("Author,title,price,pages,style:");
 					inp = input.nextLine();
-					String[] strArray = inp.split(",");
+					strArray = inp.split(",");
 					products[i] = new Book(strArray[0],strArray[1],Integer.parseInt(strArray[2]),Integer.parseInt(strArray[3]),strArray[4]);
 					ok = true;
-				}
-				else {
+					break;
+				case "BREAD":
+					System.out.println("Name,price,amount: ");
+					inp = input.nextLine();
+					strArray = inp.split(",");
+					products[i] = new Bread(strArray[0],Integer.parseInt(strArray[1]),Integer.parseInt(strArray[2]));
+					ok = true;
+					break;
+				default:
 					System.out.println("No such type");
 					ok = false;
 				}
