@@ -24,7 +24,6 @@ public class PersonTest {
 		} else {
 			System.out.println("Its an adult\n " + p2);
 		}
-		
 	}
 	
 	public static Person read() {

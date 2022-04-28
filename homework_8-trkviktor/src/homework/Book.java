@@ -1,7 +1,9 @@
-package product;
+package homework;
 
 import java.time.LocalDate;
-import product.interfaces.Sellable;
+import java.util.Hashtable;
+
+import homework.product.Product;
 
 public class Book extends Product{
 	private String author;
@@ -9,6 +11,63 @@ public class Book extends Product{
 	private final LocalDate yearOfPublication;
 	private int pages;
 	private String style;
+
+	
+	
+	
+	public Book(String author, String title, int price, int pages, String style) {
+		super("book", price, 5);
+		this.author=author;
+		this.title=title;
+		this.style=style;
+		this.yearOfPublication=LocalDate.now();
+		if(pages < 0)
+			this.pages=0;
+		else
+			this.pages=pages;
+		
+	}
+
+	
+	public Book(String author, String title, String style) {
+		super("book", 2500, 5);
+		this.author=author;
+		this.title=title;
+		this.style=style;
+		this.pages=100;
+		this.yearOfPublication=LocalDate.now();
+	}
+	
+	public static int sumGrossPrice(Book[] books) {
+		int total = 0;
+		for(Book bk : books) {
+			total += bk.getTaxedValue();
+		}
+		return total;
+			
+	}
+	
+	public static String[] selectAuthors(Book[] books, int unitPrice) {
+		
+		Hashtable<Integer, String> dict = new Hashtable<Integer, String>();
+		int x = 0;
+		for(int i = 0; i < books.length; i++) {
+			//System.out.println("TEST: " + books[i].getAuthor() + books[i].getUnitPrice());
+			if(!(dict.contains(books[i].getAuthor())) && books[i].getUnitPrice()>unitPrice)
+			{
+				dict.put(x, books[i].getAuthor());
+				x++;
+			}
+		}
+		
+		String[] array = new String[dict.size()];
+		for(int i = 0; i < array.length; i++) {
+			array[i] = dict.get(i);
+			System.out.println(array[i]);
+		}
+		return array;
+		
+	}
 	
 	
 	
@@ -29,7 +88,6 @@ public class Book extends Product{
 			{
 				books[i].decreasePrice(10);
 			}
-			
 		}
 	}
 	
@@ -38,7 +96,7 @@ public class Book extends Product{
 		int count = 0;
 		for(Book bk : books) {
 			if (bk.getStyle().equalsIgnoreCase(style)){
-				total += bk.getUnitPrice();
+				total += bk.getPrice();
 				count++;
 			}
 		}
@@ -79,28 +137,7 @@ public class Book extends Product{
 			super.decreasePrice(percent);
 	}
 	
-	public Book(String author, String title, int price, int pages, String style) {
-		super("book", price);
-		this.author=author;
-		this.title=title;
-		this.style=style;
-		this.yearOfPublication=LocalDate.now();
-		if(pages < 0)
-			this.pages=0;
-		else
-			this.pages=pages;
-		
-	}
-
 	
-	public Book(String author, String title, String style) {
-		super("book",2500);
-		this.author=author;
-		this.title=title;
-		this.style=style;
-		this.pages=100;
-		this.yearOfPublication=LocalDate.now();
-	}
 
 	public static Book getLongestEvenPagesBook(Book[] books) {
 		Book max = null; 
@@ -171,16 +208,16 @@ public class Book extends Product{
 	
 	
 
-	
-
-	
-	
 	@Override
 	public String toString() {
-		return "Book [author=" + author + ", title=" + title + ", yearOfPublication=" + yearOfPublication + ", pages="
-				+ pages + ", style=" + style + ", getPrice()=" + getPrice() + ", getCurrency()=" + getCurrency() + "]";
+		return "Book [author=" + author + ", title=" + title + ", pages=" + pages + ", style=" + style
+				+ ", getPrice()=" + getPrice() + ", getYearOfPublication()=" + getYearOfPublication() + ", getUnitPrice()=" + getUnitPrice() + "]";
 	}
+	
+	
 
+	
+	
 	public String getStyle() {
 		return style;
 	}
@@ -231,11 +268,12 @@ public class Book extends Product{
 		
 	}
 
+
 	@Override
 	public int getUnitPrice() {
-		return (int)(this.getPrice()/(double)pages);
+		//System.out.println((int)Math.round(this.getTaxedValue()/pages));
+		return (int)Math.round(this.getTaxedValue()/pages);
 	}
-
 	
 	
 
