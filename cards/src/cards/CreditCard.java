@@ -17,13 +17,44 @@ public class CreditCard extends Card {
 	}
 	
 	@Override
-	public boolean MoneyWithdrawal(int amount) {
-		if(super.getBalance() < amount && super.getValid().compareTo(LocalDate.now()) > 0 && credit >= amount) {
-			credit -= amount;
+	public boolean ChargeFee(int amount) {
+		if(super.getBalance() >= amount) {
+			super.setBalance(super.getBalance()-(amount+50));
 			return true;
 		}
+		return false;
+	}
+	
+	@Override
+	public boolean MoneyWithdrawal(int amount) {
+		if(super.getBalance() >= amount && super.getValid().compareTo(LocalDate.now()) > 0) {
+			super.setBalance(super.getBalance()-amount);
+			System.out.println("Pénzfelvét: " + amount + " Sikeres Új egyenleg: " + super.getBalance() + " Hitelkeret: " + credit);	
+			return true;
+		} else if(credit >= amount){
+			credit -= amount;
+			System.out.println("Pénzfelvét: " + amount + " Sikeres Új egyenleg: " + super.getBalance() + " Hitelkeret: " + credit);		
+			return true;
+		}
+		System.out.println("Pénzfelvét: " + amount + " Sikertelen Új egyenleg: " + super.getBalance() + " Hitelkeret: " + credit);
+		return false;
+	
+
+	}
+	
+	@Override
+	public String toString() {
+		return "CreditCard [credit=" + credit + ", getBalance()=" + getBalance() + ", getBank()=" + getBank()
+				+ ", getValid()=" + getValid() + ", getName()=" + getName() + "]";
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
 	}
 	
 	
-
 }
