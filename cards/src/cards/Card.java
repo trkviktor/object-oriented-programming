@@ -39,14 +39,15 @@ public class Card implements Chargeable{
 		}
 	}
 	
-	public boolean MoneyWithdrawal(int amount) {
+	public boolean MoneyWithdrawal(int amount) throws NotEnoughCreditException {
 		if(balance >= amount && valid.compareTo(LocalDate.now()) > 0) {
 			balance -= amount;
 			System.out.println("Pénzfelvét: " + amount + " Sikeres Új egyenleg: " + balance);	
 			return true;
 		} else {
-			System.out.println("Pénzfelvét: " + amount + " Sikertelen Új egyenleg: " + balance);	
-			return false;
+			System.out.println("Pénzfelvét: " + amount + " Sikertelen Új egyenleg: " + balance);
+			throw new NotEnoughCreditException();
+			
 		}
 	}
 	
@@ -88,12 +89,14 @@ public class Card implements Chargeable{
 	}
 
 	@Override
-	public boolean ChargeFee(int amount) throws CardException {
+	public boolean ChargeFee(int amount) throws NotEnoughCreditException {
 		if(balance >= amount) {
 			balance -= amount;
 			return true;
-		}
-		throw new CardException("Nem lehetett levonni az összeget");
+		} 
+		
+		throw new NotEnoughCreditException();
+		
 		
 	}
 	

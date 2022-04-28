@@ -7,7 +7,7 @@ import cards.*;
 
 public class CardTest {
 
-	public static void main(String[] args) throws CardException {
+	public static void main(String[] args) throws NotEnoughCreditException {
 		Card[] cards = new Card[4];
 		cards[0] = new CreditCard("Kiss Tamás",LocalDate.of(2020,04,30),Bank.OTP,150000,100000);
 		cards[1] = new Card("Nagy Levente",LocalDate.of(2022,05,31),Bank.ERSTE,100000);

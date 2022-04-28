@@ -1,9 +1,9 @@
 package Interfaces;
 
-import cards.CardException;
+import cards.NotEnoughCreditException;
 
 public interface Chargeable {
 	
-	public boolean ChargeFee(int amount) throws CardException;
+	public boolean ChargeFee(int amount) throws NotEnoughCreditException;
 	
 }

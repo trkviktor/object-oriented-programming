@@ -17,16 +17,16 @@ public class CreditCard extends Card {
 	}
 	
 	@Override
-	public boolean ChargeFee(int amount) {
+	public boolean ChargeFee(int amount) throws NotEnoughCreditException {
 		if(super.getBalance() >= amount) {
 			super.setBalance(super.getBalance()-(amount+50));
 			return true;
 		}
-		return false;
+		throw new NotEnoughCreditException();
 	}
 	
 	@Override
-	public boolean MoneyWithdrawal(int amount) {
+	public boolean MoneyWithdrawal(int amount) throws NotEnoughCreditException {
 		if(super.getBalance() >= amount && super.getValid().compareTo(LocalDate.now()) > 0) {
 			super.setBalance(super.getBalance()-amount);
 			System.out.println("Pénzfelvét: " + amount + " Sikeres Új egyenleg: " + super.getBalance() + " Hitelkeret: " + credit);	
@@ -37,7 +37,7 @@ public class CreditCard extends Card {
 			return true;
 		}
 		System.out.println("Pénzfelvét: " + amount + " Sikertelen Új egyenleg: " + super.getBalance() + " Hitelkeret: " + credit);
-		return false;
+		throw new NotEnoughCreditException();
 	
 
 	}
